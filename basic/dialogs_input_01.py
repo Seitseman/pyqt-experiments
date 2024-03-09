@@ -2,6 +2,7 @@ import sys
 
 from PySide6.QtWidgets import (
     QApplication,
+    QFileDialog,
     QInputDialog,
     QLineEdit,
     QMainWindow,
@@ -38,6 +39,10 @@ class MainWindow(QMainWindow):
         buttonText = QPushButton("Text")
         buttonText.clicked.connect(self.get_text)
         layout.addWidget(buttonText)
+        
+        buttonFile = QPushButton("Open File")
+        buttonFile.clicked.connect(self.get_file)
+        layout.addWidget(buttonFile)
         
         widget = QWidget()
         widget.setLayout(layout)
@@ -88,6 +93,10 @@ class MainWindow(QMainWindow):
         )
         
         print(f"Result: {ok}. My selected text: \n {selected_text}")
+        
+    def get_file(self):
+        fileName, selected_filter = QFileDialog.getOpenFileName(self)
+        print(f"Result: file: {fileName}  . Filters: {selected_filter}")
         
 app = QApplication(sys.argv)
 
